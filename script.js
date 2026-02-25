@@ -15,6 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const successPopup = document.getElementById("successPopup");
   const popupClose = document.querySelector(".popup-close");
   const popupOk = document.querySelector(".popup-ok");
+  const heroContactToggle = document.getElementById("heroContactToggle");
+  const heroContactStrip = document.querySelector(".hero-contact-strip");
 
   if (yearSpan) {
     yearSpan.textContent = new Date().getFullYear();
@@ -115,6 +117,15 @@ document.addEventListener("DOMContentLoaded", () => {
   );
 
   featureCards.forEach((card) => featureObserver.observe(card));
+
+  /* Hero contact toggle on small screens */
+  if (heroContactToggle && heroContactStrip) {
+    heroContactToggle.addEventListener("click", () => {
+      const isOpen = heroContactStrip.classList.toggle("is-open");
+      heroContactToggle.classList.toggle("active", isOpen);
+      heroContactToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+  }
 
   const openLightbox = (src) => {
     if (!lightbox || !lightboxImage) return;
